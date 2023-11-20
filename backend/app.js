@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 
 const authRouter = require("./routes/authRouter/auth");
 const createEventRouter = require("./routes/eventRouter/event");
+const userEventRouter = require("./routes/userRouter/user");
 
 // Creating the express app 
 const app = express();
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Api 
 app.use('/api/auth', authRouter);
 app.use('/api/event', createEventRouter);
+app.use('/api/user', userEventRouter);
 
 // exporting app 
 module.exports = app;

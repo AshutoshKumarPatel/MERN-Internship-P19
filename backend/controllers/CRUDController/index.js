@@ -7,8 +7,8 @@ const update = require('./update');
 const remove = require('./delete')
 
 const createCRUDController = (modelName) => {
-    let M = require("@/models/Events/" + modelName);
-    const Model = mongoose.model(modelName);
+    let M = require("@/models/" + modelName);
+    const Model = mongoose.model(modelName.split('/').pop());
     let crudMethods = {};
 
     crudMethods.create = async (req, res) => {

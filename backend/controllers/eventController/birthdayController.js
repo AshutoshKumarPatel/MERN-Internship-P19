@@ -1,5 +1,5 @@
 const createCRUDController = require("../CRUDController");
-const CRUDController = createCRUDController("Birthday");
+const CRUDController = createCRUDController("Events/Birthday");
 
 const birthdayController = {
     create: CRUDController.create,
