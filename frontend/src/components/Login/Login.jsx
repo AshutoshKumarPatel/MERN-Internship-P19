@@ -2,29 +2,26 @@
 import { useState } from "react";
 import loginImage from "../../assets/login.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  let navigate = useNavigate();
 
   const HandleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/auth/login/", { email, password })
-      .then((result) => console.log(result))
+      .post(
+        "/api/auth/login/",
+        { email, password }
+      )
+      .then((result) => {
+        console.log(result);
+        navigate("/");
+      })
       .catch((err) => console.log(err));
   };
-
-  // const [firstName, setfirstName] = useState()
-  // const [lastName, setlastName] = useState()
-  // const [email, setEmail] = useState()
-  // const [password, setPassword] = useState()
-  // const [userType, setUserType] = useState()
-
-  // const handleSubmit = (e) => {
-  //     e.preventDefault()
-  //     axios.post('/api/auth/signup', {firstName, lastName, email, password, userType}).then(result => console.log(result)).catch(err => console.log(err))
-  // }
 
   const wrapperStyle = {
     height: "85vh",

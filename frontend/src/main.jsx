@@ -6,13 +6,15 @@ import Layout from './Layout.jsx'
 import Home from './components/Home/Home.jsx'
 import Login from './components/Login/Login.jsx'
 import Signup from './components/Signup/Signup.jsx'
+import Birthday from './components/Birthday/Birthday.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
-      <Route path='' element={<Home />}/>
-      <Route path='login' element={<Login />}/>
-      <Route path='signup' element={<Signup />}/>
+      <Route path='/' element={<Home />}/>
+      <Route path='/login' element={<Login />}/>
+      <Route path='/signup' element={<Signup />}/>
+      <Route path='/birthday' element={<Birthday />}/>
     </Route>
   )
 )

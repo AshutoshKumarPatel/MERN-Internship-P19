@@ -1,36 +1,31 @@
-import React from 'react';
-import './styles.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./styles.css";
 
-const Header = ({ isLoggedIn, onGetStartedClick, onProfileClick }) => {
+const Header = ({ isLoggedIn, onProfileClick }) => {
   return (
     <div className="flex justify-between items-center p-2">
       <div>
-        <span className="text-3xl font-bold font-pacifico text-red-500">aayojan</span>
+        {/* Link to the home route */}
+        <Link to="/" className="text-3xl font-bold font-pacifico text-red-500">
+          aayojan
+        </Link>
       </div>
 
       <div>
         <nav className="space-x-4 font-poppins text-xl">
-          <a href="/">Weddings</a>
-          <a href="/about">Birthdays</a>
-          <a href="/contact">Concerts</a>
-          <a href="/contact">Educational</a>
-          <a href="/contact">Corporate</a>
+          <Link to="/birthday">Birthdays</Link>
         </nav>
       </div>
 
       {/* Right section with "Get Started" button and conditional profile icon */}
       <div className="flex items-center space-x-4">
-        <button 
-          className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded transition"
-          onClick={onGetStartedClick}
-        >
+        {/* Link to the /login route */}
+        <Link to="/login" className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded transition">
           Get Started
-        </button>
+        </Link>
         {isLoggedIn && (
-          <span 
-            className="cursor-pointer text-xl"
-            onClick={onProfileClick}
-          >
+          <span className="cursor-pointer text-xl" onClick={onProfileClick}>
             {/* Add your profile icon here */}
             🌟
           </span>
