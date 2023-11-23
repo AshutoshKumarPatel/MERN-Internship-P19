@@ -46,6 +46,17 @@ async function login(req, res) {
             { expiresIn: '24h' }
         );
 
+        const UserModel = require("@/models/Users/" + result.type.charAt(0).toUpperCase() + result.type.slice(1));
+        const userDetails = await UserModel.findOne({ user: result._id });
+        let fullRegistration = false;
+
+        if (!userDetails) {
+            fullRegistration = false;
+        }
+        else {
+            fullRegistration = true;
+        }
+
         user.isLoggedIn = true;
         user.jwt.push(token);
         await user.save();
@@ -66,7 +77,8 @@ async function login(req, res) {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
-                    type: user.type
+                    type: user.type,
+                    fullRegistration: fullRegistration,
                 },
                 token: token,
                 message: 'Successfully logged in.',

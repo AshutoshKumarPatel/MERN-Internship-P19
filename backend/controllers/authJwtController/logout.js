@@ -1,11 +1,11 @@
 const User = require("@/models/Users/User");
 
-async function logout (req, res, next) {
+async function logout (req, res) {
   try {
     // const { email } = req.body;
     const token = req.cookies.token;
 
-    const user = await User.findOne({ email: req.user.email });
+    const user = await User.findOne({ _id: req.User.id });
     if (!user) {
         return res.status(404).json({
             success: false,
@@ -26,7 +26,10 @@ async function logout (req, res, next) {
         domain: req.hostname,
         Path: '/',
       })
-      .json({ isLoggedOut: true });
+      .json({
+        success: true,
+        message: 'Successfully logged out.',
+      });
   } catch (error) {
     res.status(500).json({ success: false, result: null, message: error.message, error: error });
   }

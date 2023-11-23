@@ -5,18 +5,17 @@ const User = require("@/models/Users/User");
 
 async function signup(req, res) {
     try {
-        const { firstName, lastName, email, password, isLoggedIn, type } = req.body;
+        const { firstName, lastName, email, password, type } = req.body;
         
         const objectSchema = Joi.object({
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
             email: Joi.string().email({ tlds: { allow: false } }).required(),
             password: Joi.string().required(),
-            isLoggedIn: Joi.boolean().required(),
-            type: Joi.string().valid('individual', 'hall_owner', 'catering', 'musician', 'photographer', 'decorator', 'performer', 'speaker').required(),
+            type: Joi.string().valid('individual', 'hallOwner', 'catering', 'musician', 'photographer', 'decorator', 'performer', 'speaker').required(),
         }).unknown(false);
 
-        const { error, value } = objectSchema.validate( {firstName, lastName, email, password, isLoggedIn, type} );
+        const { error, value } = objectSchema.validate( {firstName, lastName, email, password, type} );
         if (error) {
             return res.status(409).json({
                 success: false,
@@ -45,7 +44,7 @@ async function signup(req, res) {
                 lastName,
                 email,
                 password: hashedPassword,
-                isLoggedIn,
+                isLoggedIn: "false",
                 jwt: [],
                 type
             });
