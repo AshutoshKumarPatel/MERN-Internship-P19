@@ -20,4 +20,5 @@ const individualSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model("Individual", individualSchema);
+const Individual = mongoose.model("Individual", individualSchema);
+module.exports = { Individual, individualSchema : individualSchema };

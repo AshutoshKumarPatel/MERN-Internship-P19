@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const individualSchema = require("./Individual")
+const { individualSchema } = require("./Individual")
 
 const musicianSchema = new mongoose.Schema({
     ...individualSchema.obj,
@@ -29,9 +29,7 @@ const musicianSchema = new mongoose.Schema({
     },
     genre: {
         type: String,
-        enum: ['Pop', 'Classical', 'Rock', 'Rap', 'DJ'],
         required: true,
-        default: "",
     }
 }, 
 {

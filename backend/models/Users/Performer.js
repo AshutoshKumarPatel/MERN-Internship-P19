@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const individualSchema = require("./Individual")
+const { individualSchema } = require("./Individual")
 
 const performerSchema = new mongoose.Schema({
     ...individualSchema.obj,
@@ -29,9 +29,7 @@ const performerSchema = new mongoose.Schema({
     },
     performerType: {
         type: String,
-        enum: ['singer', 'dancer', 'magician', 'comedy'],
         required: true,
-        default: "",
     }
 }, 
 {

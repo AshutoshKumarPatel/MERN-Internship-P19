@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const individualSchema = require("./Individual")
+const { individualSchema } = require("./Individual")
 
 const decoratorSchema = new mongoose.Schema({
     ...individualSchema.obj,

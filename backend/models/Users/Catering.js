@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const individualSchema = require("./Individual")
+const { individualSchema } = require("./Individual")
 
 const cateringSchema = new mongoose.Schema({
     ...individualSchema.obj,
@@ -29,9 +29,7 @@ const cateringSchema = new mongoose.Schema({
     },
     cusine: {
         type: String,
-        enum: ['Italian', 'Chinese', 'NorthIndian', 'Mugulai', 'SouthIndian', 'Continental'],
         required: true,
-        default: "",
     }
 }, 
 {
