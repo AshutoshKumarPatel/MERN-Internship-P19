@@ -2,14 +2,24 @@ const express = require("express");
 const router = express.Router();
 
 const { catchErrors } = require("@/handlers/errorHandlers");
+const { isValidUserToken } = require("../../middleware/isValidUserToken");
+const { individualController, hallOwnerController, musicianController, performerController, cateringController, speakerController } = require("@/controllers/userController");
+const uploadMiddleware = require("@/middleware/uploadMiddleware");
 
-const { hallOwnerController, musicianController, performerController, cateringController, speakerController } = require("@/controllers/userController");
+// const upload = uploadMiddleware('./public/uploads/profileImage');
+const uploadProfileImage = uploadMiddleware('./public/uploads/profileImage').single('profilePicPath');
 
-router.route('/hallOwner').get(catchErrors(hallOwnerController.readAll));
-router.route('/catering').get(catchErrors(cateringController.readAll));
-router.route('/performer').get(catchErrors(performerController.readAll));
-router.route('/musician').get(catchErrors(musicianController.readAll));
-router.route('/speaker').get(catchErrors(speakerController.readAll));
+router.route('/me').get(isValidUserToken, catchErrors(individualController.read));
+router.route('/me/details').get(isValidUserToken, catchErrors(individualController.readFields));
+router.route('/me/details').post(isValidUserToken, uploadProfileImage, catchErrors(individualController.create));
+router.route('/me/edit').put(isValidUserToken, catchErrors(individualController.update));
+router.route('/me/delete').delete(isValidUserToken, catchErrors(individualController.delete));
+
+router.route('/hallOwner').get(isValidUserToken, catchErrors(hallOwnerController.readAll));
+router.route('/catering').get(isValidUserToken, catchErrors(cateringController.readAll));
+router.route('/performer').get(isValidUserToken, catchErrors(performerController.readAll));
+router.route('/musician').get(isValidUserToken, catchErrors(musicianController.readAll));
+router.route('/speaker').get(isValidUserToken, catchErrors(speakerController.readAll));
 
 
 module.exports = router;
