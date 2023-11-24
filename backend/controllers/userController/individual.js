@@ -7,7 +7,7 @@ const individualController = {
         try {
 
             const dataModel = require("@/models/Users/" + req.User.type.charAt(0).toUpperCase() + req.User.type.slice(1));
-            let requestData = {userId: req.User._id};
+            let requestData = { userId: req.User._id };
 
             requestData = { ...requestData, ...req.body };
             const fileData = { ...req.file };
@@ -34,17 +34,17 @@ const individualController = {
             // Dynamically require the data model based on the user type
             const dataModel = require("@/models/Users/" + req.User.type.charAt(0).toUpperCase() + req.User.type.slice(1));
             const modelSchema = dataModel.schema;
-    
+
             // Define an array of fields to exclude from extraction
             const excludedFields = ['userId'];
-    
+
             // Extract relevant information from the data model schema, excluding specified fields
             const extractedData = Object.entries(modelSchema.obj)
                 .filter(([key]) => !excludedFields.includes(key))
                 .map(([key, value]) => {
                     // Determine the type of each field
                     let typeName;
-    
+
                     if (value.type && value.type.name) {
                         typeName = value.type.name.toLowerCase();
                     } else {
@@ -52,20 +52,20 @@ const individualController = {
                         const matches = typeString.match(/\b(\w+)\b/);
                         typeName = matches ? matches[0].toLowerCase() : 'unknown';
                     }
-    
+
                     // Map the field types to user-friendly types
                     const typeMapping = {
                         string: 'text',
                         number: 'number',
-                        boolean: 'boolean',
+                        boolean: 'checkbox',
                         date: 'date',
                         schemaobjectid: 'text',
                         // Add more mappings as needed
                     };
-    
+
                     // Get the user-friendly type or default to 'unknown'
                     const userFriendlyType = typeMapping[typeName] || 'unknown';
-    
+
                     // Return an object with field name, type, and whether it's required
                     return {
                         name: key,
@@ -73,14 +73,15 @@ const individualController = {
                         required: value.required || false,
                     };
                 });
-    
+
             // Send a successful response with the extracted data
             return res.status(200).json({
                 success: true,
                 result: extractedData,
                 message: 'Loaded data for user type:' + req.User.type,
             });
-        } catch (error) {
+        }
+        catch (error) {
             // Handle any errors that occur during the process
             return res.status(500).json({
                 success: false,
@@ -90,7 +91,7 @@ const individualController = {
             });
         }
     },
-    
+
 
     read: async (req, res) => {
         try {
@@ -101,17 +102,17 @@ const individualController = {
                     result: null,
                     message: 'No document found by this id: ' + req.User.id,
                 });
-            } 
+            }
             else {
                 let responseData = { ...result._doc };
-    
+
                 const dataModel = require("@/models/Users/" + req.User.type.charAt(0).toUpperCase() + req.User.type.slice(1));
-                const data =  await dataModel.findOne({ userId: req.User._id });
-    
+                const data = await dataModel.findOne({ userId: req.User._id });
+
                 if (data) {
                     responseData = { ...responseData, ...data._doc };
                 }
-    
+
                 return res.status(200).json({
                     success: true,
                     result: responseData,
@@ -127,7 +128,7 @@ const individualController = {
             });
         }
     },
-    
+
     update: async (req, res) => {
         try {
             const result = await Model.findOneAndUpdate({ _id: req.User.id }, req.body, {
