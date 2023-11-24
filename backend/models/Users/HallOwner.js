@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const { individualSchema } = require("./Individual")
+const { baseSchema } = require("./BaseSchema")
 
 const hallOwnerSchema = new mongoose.Schema({
-    ...individualSchema.obj,
+    ...baseSchema.obj,
     capacity: {
         type: Number,
         required: true,

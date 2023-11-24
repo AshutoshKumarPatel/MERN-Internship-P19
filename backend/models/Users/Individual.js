@@ -1,24 +1,12 @@
 const mongoose = require("mongoose");
+const { baseSchema } = require("./BaseSchema")
+
 
 const individualSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    },
-    contactNo: {
-        type: Number,
-        required: true,
-    },
-    profilePicPath: {
-        type: String,
-        required: false,
-        default: "",
-    },
+    ...baseSchema.obj
 }, 
 {
     timestamps: true
 });
 
-const Individual = mongoose.model("Individual", individualSchema);
-module.exports = { Individual, individualSchema : individualSchema };
+module.exports = mongoose.model("Individual", individualSchema);

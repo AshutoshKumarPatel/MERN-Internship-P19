@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const { individualSchema } = require("./Individual")
+const { baseSchema } = require("./BaseSchema")
 
 const performerSchema = new mongoose.Schema({
-    ...individualSchema.obj,
+    ...baseSchema.obj,
     charges: {
         type: Number,
         required: true,
