@@ -13,7 +13,7 @@ async function login(req, res) {
             password: Joi.string().required(),
         }).unknown(false);
 
-        const { error, value } = objectSchema.validate( {email, password} );
+        const { error, value } = objectSchema.validate({email, password});
         if (error) {
             return res.status(409).json({
                 success: false,
@@ -46,8 +46,8 @@ async function login(req, res) {
             { expiresIn: '24h' }
         );
 
-        const UserModel = require("@/models/Users/" + result.type.charAt(0).toUpperCase() + result.type.slice(1));
-        const userDetails = await UserModel.findOne({ user: result._id });
+        const UserModel = require("@/models/Users/" + user.type.charAt(0).toUpperCase() + user.type.slice(1));
+        const userDetails = await UserModel.findOne({ user: user._id });
         let fullRegistration = false;
 
         if (!userDetails) {
