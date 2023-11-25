@@ -1,4 +1,4 @@
-const individualController = require("./individual")
+const individualController = require("./individualController")
 const hallOwnerController = require("./hallOwnerController")
 const musicianController = require("./musicianController")
 const performerController = require("./performerController")

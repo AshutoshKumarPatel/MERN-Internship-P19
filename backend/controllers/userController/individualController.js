@@ -5,17 +5,16 @@ const Model = mongoose.model(modelName.split('/').pop());
 const individualController = {
     create: async (req, res) => {
         try {
-
             const dataModel = require("@/models/Users/" + req.User.type.charAt(0).toUpperCase() + req.User.type.slice(1));
             let requestData = { userId: req.User._id };
-
+            let fName = {firstName: req.User.firstName}
+            requestData = { ...requestData, ...fName };
             requestData = { ...requestData, ...req.body };
             const fileData = { ...req.file };
 
             if (fileData.hasOwnProperty('path')) {
                 requestData.profilePicPath = fileData.path;
             }
-
             const data = await dataModel.create(requestData);
             return res.status(201).json({
                 success: true,
@@ -35,7 +34,7 @@ const individualController = {
             const modelSchema = dataModel.schema;
 
             // Define an array of fields to exclude from extraction
-            const excludedFields = ['userId'];
+            const excludedFields = ['userId', 'firstName'];
 
             // Extract relevant information from the data model schema, excluding specified fields
             const extractedData = Object.entries(modelSchema.obj)
