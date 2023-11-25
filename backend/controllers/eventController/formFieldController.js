@@ -7,22 +7,19 @@ async function formFieldController(req, res) {
     const model = require("@/models/Events/" + modelName.charAt(0).toUpperCase() + modelName.slice(1));
     const modelSchema = model.schema.obj;
 
-    const excludedFields = ['invitationList'];
+    const excludedFields = ['invitationList', 'firstName'];
 
     const extractFieldData = (field) => {
-      // Check for nested fields
       if (field.type && field.type.name === 'Schema' && field.schema && field.schema.obj) {
         return Object.entries(field.schema.obj)
           .map(([nestedKey, nestedValue]) => extractFieldData({ name: nestedKey, ...nestedValue }))
           .flat();
       }
 
-      // Skip SchemaObjectId and fields in the exclusion list
       if (field.type && field.type.name === 'SchemaObjectId') {
         return [];
       }
 
-      // Determine the type of each field
       let typeName;
 
       if (field.type && field.type.name) {
@@ -33,7 +30,6 @@ async function formFieldController(req, res) {
         typeName = matches ? matches[0].toLowerCase() : 'unknown';
       }
 
-      // Map the field types to user-friendly types
       const typeMapping = {
         string: 'text',
         number: 'number',
@@ -41,10 +37,7 @@ async function formFieldController(req, res) {
         date: 'date',
       };
 
-      // Get the user-friendly type or default to 'unknown'
       const userFriendlyType = typeMapping[typeName] || 'unknown';
-
-      // Return an object with field name, type, and whether it's required
       return {
         name: field.name,
         type: userFriendlyType,
@@ -57,7 +50,6 @@ async function formFieldController(req, res) {
       .map(([key, value]) => extractFieldData({ name: key, ...value }))
       .flat();
 
-    // Send a successful response with the extracted data
     return res.status(200).json({
       success: true,
       result: extractedData,
