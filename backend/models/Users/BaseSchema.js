@@ -6,6 +6,10 @@ const baseSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
+    firstName: {
+        type: String,
+        required: true,
+    },
     contactNo: {
         type: Number,
         required: true,
