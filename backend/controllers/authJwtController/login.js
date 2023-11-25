@@ -47,7 +47,7 @@ async function login(req, res) {
         );
 
         const UserModel = require("@/models/Users/" + user.type.charAt(0).toUpperCase() + user.type.slice(1));
-        const userDetails = await UserModel.findOne({ user: user._id });
+        const userDetails = await UserModel.findOne({ userId: user._id });
         let fullRegistration = false;
 
         if (!userDetails) {
