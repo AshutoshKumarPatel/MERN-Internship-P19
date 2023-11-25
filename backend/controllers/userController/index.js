@@ -4,6 +4,7 @@ const musicianController = require("./musicianController")
 const performerController = require("./performerController")
 const cateringController = require("./cateringController")
 const speakerController = require("./speakerController")
+const decoratorController = require("./decoratorController")
 
 module.exports = {
     individualController,
@@ -11,5 +12,6 @@ module.exports = {
     musicianController,
     performerController,
     cateringController,
-    speakerController
+    speakerController,
+    decoratorController
 };

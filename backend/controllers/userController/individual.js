@@ -12,7 +12,6 @@ const individualController = {
             requestData = { ...requestData, ...req.body };
             const fileData = { ...req.file };
 
-
             if (fileData.hasOwnProperty('path')) {
                 requestData.profilePicPath = fileData.path;
             }
