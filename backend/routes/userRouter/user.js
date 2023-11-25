@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { catchErrors } = require("@/handlers/errorHandlers");
 const { isValidUserToken } = require("../../middleware/isValidUserToken");
-const { individualController, hallOwnerController, musicianController, performerController, cateringController, speakerController } = require("@/controllers/userController");
+const { individualController, hallOwnerController, musicianController, performerController, cateringController, speakerController, decoratorController } = require("@/controllers/userController");
 const uploadMiddleware = require("@/middleware/uploadMiddleware");
 
 // const upload = uploadMiddleware('./public/uploads/profileImage');
@@ -20,6 +20,6 @@ router.route('/catering').get(isValidUserToken, catchErrors(cateringController.r
 router.route('/performer').get(isValidUserToken, catchErrors(performerController.readAll));
 router.route('/musician').get(isValidUserToken, catchErrors(musicianController.readAll));
 router.route('/speaker').get(isValidUserToken, catchErrors(speakerController.readAll));
-
+router.route('/decorator').get(isValidUserToken, catchErrors(decoratorController.readAll));
 
 module.exports = router;
