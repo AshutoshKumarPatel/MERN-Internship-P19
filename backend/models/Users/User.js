@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['individual', 'hall_owner', 'catering', 'musician', 'photographer', 'decorator', 'performer', 'speaker'],
+        enum: ['individual', 'hallOwner', 'catering', 'musician', 'photographer', 'decorator', 'performer', 'speaker'],
         required: true,
     },
 }, 
