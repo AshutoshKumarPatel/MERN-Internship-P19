@@ -1,6 +1,27 @@
 const create = async (Model, req, res) => {
     try {
-        const data = await Model.create(req.body);
+        const userTypes = ["hallOwner", "catering", "photographer", "musician", "performer", "speaker", "decorator"];
+        console.log(req.User);
+        let requestData = { organizerId: req.User._id };
+
+        for (const key in req.body) {
+            if (userTypes.includes(key)) {
+                const userTypeIndex = userTypes.indexOf(key);
+                requestData[userTypes[userTypeIndex]] = { ['id']: req.body[key] };
+            } else {
+                requestData[key] = req.body[key];
+            }
+        }
+
+        const fileData = { ...req.file };
+
+        if (fileData.hasOwnProperty('path')) {
+            requestData.profilePicPath = fileData.path;
+        }
+
+        console.log(requestData);
+
+        const data = await Model.create(requestData);
         return res.status(201).json({
             success: true,
             result: data,
