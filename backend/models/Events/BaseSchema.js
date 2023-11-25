@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
 const baseSchema = new mongoose.Schema({
-    eventName: {
-        type: String,
-        required: true,
-    },
     organizerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        required: true,
+    },
+    eventName: {
+        type: String,
         required: true,
     },
     description: {
@@ -49,7 +49,7 @@ const serviceSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         refPath: 'onModel',
         required: false,
-        default: "",
+        default: null,
     },
     approval: {
         type: Boolean,
@@ -58,7 +58,8 @@ const serviceSchema = new mongoose.Schema({
     },
     onModel: {
         type: String,
-        required: true,
+        required: false,
+        default: null,
         enum: ['HallOwner', 'Performer', 'Catering', 'Musician', 'Decorator', 'Speaker', 'Photographer']
     }
 });
