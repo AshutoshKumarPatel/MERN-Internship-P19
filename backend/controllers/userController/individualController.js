@@ -7,7 +7,7 @@ const individualController = {
         try {
             const dataModel = require("@/models/Users/" + req.User.type.charAt(0).toUpperCase() + req.User.type.slice(1));
             let requestData = { userId: req.User._id };
-            let fName = {firstName: req.User.firstName}
+            let fName = { firstName: req.User.firstName }
             requestData = { ...requestData, ...fName };
             requestData = { ...requestData, ...req.body };
             const fileData = { ...req.file };
@@ -103,6 +103,13 @@ const individualController = {
             }
             else {
                 let responseData = { ...result._doc };
+                // console.log(responseData);
+
+                delete responseData.password;
+                delete responseData.isLoggedIn;
+                delete responseData.createdAt;
+                delete responseData.updatedAt;
+                delete responseData.jwt;
 
                 const dataModel = require("@/models/Users/" + req.User.type.charAt(0).toUpperCase() + req.User.type.slice(1));
                 const data = await dataModel.findOne({ userId: req.User._id });
@@ -129,11 +136,45 @@ const individualController = {
 
     update: async (req, res) => {
         try {
-            const result = await Model.findOneAndUpdate({ _id: req.User.id }, req.body, {
+            console.log(req.body)
+            const updatedValues = {};
+            const exclusionList = ['_id', 'createdAt', 'updatedAt', '__v', 'userId', 'type'];
+
+            // Iterate over the keys in req.body and add them to updatedValues
+            Object.keys(req.body).forEach((key) => {
+                if (!exclusionList.includes(key)) {
+                    updatedValues[key] = req.body[key];
+                }
+            });
+
+            userData = {
+                firstName: updatedValues.firstName,
+                lastName: updatedValues.lastName,
+                email: updatedValues.email
+            }
+            console.log(userData);
+
+            userTypeData = {
+                ...updatedValues
+            }
+
+            delete userTypeData.lastName;
+            delete userTypeData.email;
+
+            console.log(userTypeData);
+
+            const result = await Model.findOneAndUpdate({ _id: req.User.id }, userData, {
                 new: true,
                 runValidators: true,
             }).exec();
-            if (!result) {
+
+            const typeModel = require("@/models/Users/" + req.User.type.charAt(0).toUpperCase() + req.User.type.slice(1));
+            const updateType = await typeModel.findOneAndUpdate({ _id: req.body._id }, userTypeData, {
+                new: true,
+                runValidators: true,
+            }).exec();
+
+            if (!result || !updateType) {
                 return res.status(404).json({
                     success: false,
                     result: null,
@@ -142,8 +183,11 @@ const individualController = {
             } else {
                 return res.status(200).json({
                     success: true,
-                    result,
-                    message: 'we update this document by this id: ' + req.User.id,
+                    result: {
+                        user: result,
+                        type: updateType
+                    },
+                    message: 'We updated documents by this id: ' + req.User.id,
                 });
             }
         }
