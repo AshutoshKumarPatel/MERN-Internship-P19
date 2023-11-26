@@ -12,7 +12,7 @@ const uploadProfileImage = uploadMiddleware('./public/uploads/profileImage').sin
 router.route('/me').get(isValidUserToken, catchErrors(individualController.read));
 router.route('/me/details').get(isValidUserToken, catchErrors(individualController.readFields));
 router.route('/me/details').post(isValidUserToken, uploadProfileImage, catchErrors(individualController.create));
-router.route('/me/edit').put(isValidUserToken, catchErrors(individualController.update));
+router.route('/me/edit').put(isValidUserToken, uploadProfileImage, catchErrors(individualController.update));
 router.route('/me/delete').delete(isValidUserToken, catchErrors(individualController.delete));
 
 router.route('/hallOwner').get(isValidUserToken, catchErrors(hallOwnerController.readAll));
