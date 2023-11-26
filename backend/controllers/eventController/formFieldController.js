@@ -56,7 +56,6 @@ async function formFieldController(req, res) {
       message: 'API worked successfully',
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       result: null,
