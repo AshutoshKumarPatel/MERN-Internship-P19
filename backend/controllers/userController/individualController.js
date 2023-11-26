@@ -103,7 +103,6 @@ const individualController = {
             }
             else {
                 let responseData = { ...result._doc };
-                // console.log(responseData);
 
                 delete responseData.password;
                 delete responseData.isLoggedIn;
@@ -136,7 +135,6 @@ const individualController = {
 
     update: async (req, res) => {
         try {
-            console.log(req.body)
             const updatedValues = {};
             const exclusionList = ['_id', 'createdAt', 'updatedAt', '__v', 'userId', 'type'];
 
@@ -152,7 +150,6 @@ const individualController = {
                 lastName: updatedValues.lastName,
                 email: updatedValues.email
             }
-            console.log(userData);
 
             userTypeData = {
                 ...updatedValues
@@ -161,7 +158,6 @@ const individualController = {
             delete userTypeData.lastName;
             delete userTypeData.email;
 
-            console.log(userTypeData);
 
             const result = await Model.findOneAndUpdate({ _id: req.User.id }, userData, {
                 new: true,
