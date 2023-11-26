@@ -1,13 +1,13 @@
 const login = require("./login");
 const signup = require("./signup");
 const logout = require("./logout");
-// const delUser = require("./delUser");
+const delUser = require("./delUser");
 
 const authJwtController = {
     login,
     signup,
-    logout
-    // delUser
+    logout,
+    delUser
 }
 
 module.exports = authJwtController;
