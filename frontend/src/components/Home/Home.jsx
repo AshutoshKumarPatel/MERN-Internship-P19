@@ -1,4 +1,5 @@
-import React from "react";
+import { Link } from "react-router-dom";
+
 
 // Import your hero background image
 import heroImage from "../../assets/hero.png";
@@ -40,9 +41,15 @@ const Home = () => {
         {/* Text Overlay */}
         <div style={textStyle}>
           <h1 className="text-6xl font-extrabold mb-4 ">Plan your event today</h1>
-          <p className="text-5xl font-extrabold">
+          <p className="text-5xl font-extrabold mb-8">
             with aayojan
           </p>
+          <Link
+            to="/dashboard"
+            className="bg-red-500 hover:bg-red-700 text-white font-semibold text-2xl py-3 px-5 rounded transition"
+          >
+            Get Started
+          </Link>
         </div>
       </div>
     </div>
