@@ -3,7 +3,7 @@ const User = require("@/models/Users/User");
 async function delUser (req, res) {
   try {
     const userType = require("@/models/Users/" + req.User.type.charAt(0).toUpperCase() + req.User.type.slice(1));
-    const eventList = ["Birthday",  "Concert",  "Corporate",  "Custom",  "EudcationalInstitution",  "Wedding"];
+    const eventList = ["Birthday",  "Concert",  "Corporate",  "Custom",  "EducationalInstitution",  "Wedding"];
     
     for (let i = 0; i < eventList.length; i++) {
       const eventModel = require("@/models/Events/" + eventList[i]);
