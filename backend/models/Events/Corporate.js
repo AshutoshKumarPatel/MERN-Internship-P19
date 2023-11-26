@@ -7,4 +7,4 @@ const corporateSchema = new mongoose.Schema({
     speaker: serviceSchema
 });
 
-module.exports = mongoose.model("Coporate", corporateSchema);
+module.exports = mongoose.model("Corporate", corporateSchema);

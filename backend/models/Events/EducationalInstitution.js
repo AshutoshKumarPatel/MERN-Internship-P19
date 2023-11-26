@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { baseSchema, serviceSchema } = require("./BaseSchema");
 
-const educationalSchema = new mongoose.Schema({
+const educationalInstitutionSchema = new mongoose.Schema({
     ...baseSchema.obj,
     performer: serviceSchema,
     catering: serviceSchema,
@@ -9,4 +9,4 @@ const educationalSchema = new mongoose.Schema({
     photographer: serviceSchema
 });
 
-module.exports = mongoose.model("Educational", educationalSchema);
+module.exports = mongoose.model("EducationalInstitution", educationalInstitutionSchema);
