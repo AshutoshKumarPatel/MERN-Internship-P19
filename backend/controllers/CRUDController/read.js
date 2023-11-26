@@ -10,7 +10,7 @@ const read = async (Model, req, res) => {
         } else {
             return res.status(200).json({
                 success: true,
-                result,
+                result: result,
                 message: 'we found this document by this id: ' + req.params.id,
             });
         }

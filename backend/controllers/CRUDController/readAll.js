@@ -1,6 +1,6 @@
 const readAll = async (Model, req, res) => {
     try {
-        const results = await Model.find({});
+        const results = await Model.find({organizerId: req.User.id});
         if (!results) {
             return res.status(404).json({
                 success: false,

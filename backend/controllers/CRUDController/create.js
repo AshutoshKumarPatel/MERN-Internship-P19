@@ -1,7 +1,6 @@
 const create = async (Model, req, res) => {
     try {
         const userTypes = ["hallOwner", "catering", "photographer", "musician", "performer", "speaker", "decorator"];
-        console.log(req.User);
         let requestData = { organizerId: req.User._id };
 
         for (const key in req.body) {
@@ -18,8 +17,6 @@ const create = async (Model, req, res) => {
         if (fileData.hasOwnProperty('path')) {
             requestData.profilePicPath = fileData.path;
         }
-
-        console.log(requestData);
 
         const data = await Model.create(requestData);
         return res.status(201).json({
