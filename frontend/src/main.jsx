@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import axios from 'axios'
 import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Layout from './Layout.jsx'
@@ -12,6 +13,10 @@ import EditForm from './components/UserForms/EditUserForm.jsx'
 import Profile from './components/Profile/Profile'
 import Dashboard from './components/Dashboard/Dashboard'
 import EventEdit from './components/Events/EventEdit'
+
+axios.defaults.baseURL =  import.meta.env.VITE_APP_BASE_URL;
+axios.defaults.withCredentials = true;
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
