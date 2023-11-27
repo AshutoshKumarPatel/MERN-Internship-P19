@@ -46,7 +46,7 @@ const EventCreate = () => {
     };
 
     fetchFormFields();
-  }, []);
+  }, [model]);
 
   useEffect(() => {
     const fieldsRequiringAdditionalData = [
