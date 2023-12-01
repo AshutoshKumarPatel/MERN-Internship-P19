@@ -3,9 +3,9 @@
 > This is a MERN stack internship project. Conducted by Ethenus. This version of the project supports user authentication and adding event data to the database.
 ---
 
-### **Note**: This is not a fully functional project. There are a lot of bugs around. Keep an eye on master branch for any possible updates.
+### ⚠️ **Note**: This is not a fully functional project. There are a lot of bugs around. Keep an eye on master branch for any possible updates.
 
-## Contributors
+## 💻 Contributors
 
 - [Shreyas Patondikar](https://github.com/CoderHanuShrey)
 - [Ashutosh Patel](https://github.com/AshutoshKumarPatel)
